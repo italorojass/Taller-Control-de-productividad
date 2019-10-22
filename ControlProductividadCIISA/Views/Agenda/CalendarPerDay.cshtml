@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ControlProductividadCIISA.Models.ListaActividades>
+
+@{
+
+    TimeSpan ts1 = new TimeSpan(8, 00, 0);
+    TimeSpan ts2 = new TimeSpan(19, 00, 0);
+    TimeSpan incremento = new TimeSpan(0, 60, 0);
+
+    List<TimeSpan> HorasDelDia = new List<TimeSpan>();
+    while (ts1 <= ts2)
+    {
+        HorasDelDia.Add(ts1);
+        ts1 = ts1.Add(incremento);
+    }
+
+    //int count = 0;
+}
+<input type="hidden" id="GetDiaHoy" />
+
+<table width="100%" border="1" style="overflow-x: scroll;">
+    <tr>
+
+        @foreach (var h in HorasDelDia)
+        {
+
+            <td align="center">
+                
+                @h.ToString(@"hh\:mm")
+            </td>
+        }
+    </tr>
+
+    <tr>
+
+        @foreach (var h in HorasDelDia)
+        {
+
+            <td align="left">
+                @foreach (var item in Model)
+                {
+                    var strDate = item.HoraActividad.ToString("HH:mm:ss"); // 15:16:29
+                    TimeSpan ts = TimeSpan.Parse(strDate);
+
+                    var horas = h.ToString(@"hh");
+                    var HoraCalendar = TimeSpan.Parse(horas);
+                    //var mue = ini - 1;
+                    <span>
+                        @if (ViewBag.Diahoy == item.HoraActividad.Day)
+                        {
+                            var gethour = item.HoraActividad.Hour + ":" + item.HoraActividad.Minute + ":" + item.HoraActividad.Second;
+                            TimeSpan formathour = TimeSpan.Parse(gethour);
+
+                            if (Convert.ToInt32(horas) <= item.HoraActividad.Hour)
+                            {
+                                if (Convert.ToInt32(horas) >= item.HoraActividad.Hour)
+                                {
+                                    switch (item.EstadoActividad)
+                                    {
+                                        case 0:
+                                            <div class="alert-danger">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </div>
+                                            break;
+                                        case 1:
+
+                                            <div class="alert-success">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </div>
+                                            break;
+                                    }
+
+                                    
+                                }
+                                //<span>@gethour</span>
+                            }
+
+                        }
+                       
+                    </span>
+                    
+                }
+
+
+            </td>
+        }
+    </tr>
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @foreach (var h in HorasDelDia)
+                {
+                    var strDate = item.HoraActividad.ToString("HH:mm:ss"); // 15:16:29
+                    TimeSpan ts = TimeSpan.Parse(strDate);
+
+                    var horas = h.ToString(@"hh\:mm");
+                    var HoraCalendar = TimeSpan.Parse(horas);
+                    //var mue = ini - 1;
+
+                    if (ts <= HoraCalendar)
+                    {
+
+                        if (ts >= HoraCalendar)
+                        {
+                            <div style="background-color: green;">
+                                <i class="fa fa-window-minimize" aria-hidden="true"></i>
+                            </div>
+                        }
+
+                    }
+                }
+            </td>
+
+        </tr>
+
+    }*@
+
+</table>

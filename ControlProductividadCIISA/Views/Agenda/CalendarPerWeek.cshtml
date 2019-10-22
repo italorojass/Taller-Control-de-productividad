@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ControlProductividadCIISA.Models.ListaActividades>
+@using System.Globalization;
+@{
+
+    int count = 0;
+    int count2 = 0;
+    var dt = ViewBag.ListDaysOfWeek as List<DateTime>;
+    var culture = new System.Globalization.CultureInfo("es-ES");
+    foreach (var i in ViewBag.DiasAbreviados)
+    {
+        count2++;
+    }
+}
+
+
+
+<table width="100%" border="1" style="overflow-x: scroll;">
+
+    <tr>
+        <td align="left">
+            <table style="border:1px solid #ebebeb;padding:3px; width:100%;" border="1">
+
+                <tbody>
+                    <tr>
+                        @foreach (var item in ViewBag.ListDaysOfWeek)
+                        {
+                            var getnameMonth = DateTimeFormatInfo.CurrentInfo.GetMonthName(item.Month);
+                            var getabreviado = getnameMonth.Substring(0, 1).ToUpper() + getnameMonth.Substring(1, 2);
+                            var getnameday = culture.DateTimeFormat.GetDayName(item.DayOfWeek);
+                            var NameformatDay = getnameday.Substring(0, 1).ToUpper() + getnameday.Substring(1);
+                            <td>@getabreviado @item.Day (@NameformatDay)</td>
+                        }
+                    </tr>
+                    <tr>
+                        @foreach (var tt in ViewBag.ListDaysOfWeek)
+                        {
+
+                            <td>
+                               @foreach (var item in Model)
+                               {
+                                   if (item.HoraActividad.Day == tt.Day)
+                                   {
+                                    switch (item.EstadoActividad)
+                                    {
+                                        case 0:
+                                            <div class="alert-danger">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </div>
+                                            break;
+                                        case 1:
+
+                                            <div class="alert-success">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </div>
+                                            break;
+                                    }
+
+                                   }
+
+                               }
+                                
+                            </td>
+                        }
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </td>
+    </tr>
+
+</table>

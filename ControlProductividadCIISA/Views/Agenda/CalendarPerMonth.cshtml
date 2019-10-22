@@ -1,0 +1,112 @@
+﻿@model IEnumerable<ControlProductividadCIISA.Models.ListaActividades>
+
+@{
+
+    int CantDiasMes = ViewBag.DiasMes;
+    int count = 0;
+    var hoy = DateTime.Today;
+}
+
+<table width="100%" border="1" style="overflow-x: scroll;">
+    <tr>
+        <td></td>
+        <td colspan="31">
+            Dias
+        </td>
+    </tr>
+    <tr>
+        <td>MES</td>
+        @for (int i = 0; i < CantDiasMes; i++)
+        {
+            count++;
+            <td bgcolor="#C6E2FF" align="center" startdate="@count"> <span id="@count">@count</span> </td>
+        }
+
+    </tr>
+
+
+
+    <tr>
+        <td bgcolor="#efefef">
+            <span>
+                @ViewData["NombreMesActual"].ToString().ToUpper()
+            </span>
+        </td>
+        @for (int i = 1; i <= CantDiasMes; i++)
+        {
+
+            if (hoy.Day == i)
+            {
+                <td class="tdHoy">
+                    <table width="100%" border="1">
+                        
+                        @foreach (var item in Model)
+                    {
+                        if (item.HoraActividad.Day == i)
+                        {
+                            switch (item.EstadoActividad)
+                            {
+                                case 0:
+                                        <tr>
+                                            <td class="alert-danger">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </td>
+                                        </tr>
+
+                                        break;
+                                    case 1:
+                                        <tr>
+                                            <td class="alert-success">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </td>
+                                        </tr>
+                                       
+                                        break;
+                                }
+                            }
+                        }
+                    </table>
+
+                </td>
+            }
+            else
+            {
+                <td>
+                    <table width="100%" border="1">
+                        @foreach (var item in Model)
+                    {
+                        if (item.HoraActividad.Day == i)
+                        {
+                            switch (item.EstadoActividad)
+                            {
+                                case 0:
+                                        <tr>
+                                            <td class="alert-danger">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </td>
+                                        </tr>
+                                        
+                                        break;
+                                    case 1:
+                                        <tr>
+                                            <td class="alert-success">
+                                                <span>@item.HoraActividad.Hour</span>:<span>@item.HoraActividad.Minute</span>- <span>@item.NombreActividad</span>
+                                            </td>
+                                        </tr>
+                                       
+                                        break;
+                                }
+                            }
+                        }
+                    </table>
+                   
+
+                </td>
+            }
+
+        }
+
+    </tr>
+
+
+</table>
