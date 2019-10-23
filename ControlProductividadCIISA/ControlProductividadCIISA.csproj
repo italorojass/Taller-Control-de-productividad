@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgendaController.cs" />
+    <Compile Include="Controllers\AnalistaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -310,6 +311,8 @@
     <Content Include="Views\Agenda\CalendarPerYear.cshtml" />
     <Content Include="Views\Agenda\Index.cshtml" />
     <Content Include="Views\Agenda\NextYear.cshtml" />
+    <Content Include="Views\Shared\_LayoutAnalista.cshtml" />
+    <Content Include="Views\Analista\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
