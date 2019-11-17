@@ -15,6 +15,8 @@ namespace ControlProductividadCIISA.Controllers
             return View();
         }
 
+        
+
         public ActionResult SideBar()
         {
             return PartialView();
