@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d698360b44b42419df8da6de8cf37ee" Name="Diagram1">
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Area" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Estado_peticion" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Origen" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Peticion" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Proyectos" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Rol" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ControlProductividadCIISAModel.FK_tbl_Usuario_tbl_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlProductividadCIISAModel.FK_tbl_Estado_peticion_tbl_Peticion" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlProductividadCIISAModel.FK_tbl_Origen_tbl_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlProductividadCIISAModel.FK_tbl_Peticion_tbl_Origen" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlProductividadCIISAModel.FK_tbl_Peticion_tbl_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ControlProductividadCIISAModel.FK_tbl_Usuario_tbl_Rol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

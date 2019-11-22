@@ -1,0 +1,76 @@
+﻿@model ControlProductividadCIISA.Models.Login.LoginModel
+@{ 
+    Layout = null;
+}
+<link rel="icon" type="image/png" href="~/Content/Img/favicon.ico">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="~/Content/style.css" rel="stylesheet" />
+<link href="~/Content/pace.min.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<body style="" class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center" style="padding-top:10% !important;">
+            <div class="col-md-9 col-lg-12 col-xl-10 ">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+
+                                <div class="flex-grow-1 bg-login-image" >
+                                    
+
+                                    <img src="~/Content/Img/LogoCiisa3.png" />
+                                   
+                                </div>
+                            </div>
+                            <div class="col-md-6 loginContainer">
+                                <div class="p-5 pt-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Control de productividad</h4>
+                                    </div>
+                                    @using (Html.BeginForm("Login", "Login1", FormMethod.Post))
+                                    {
+                                        <div class="user">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Email, new { Class = "form-control form-control-user", placeholder = "Usuario@prueba.cl" })
+                                               <div class="colorValidation">
+                                                   @Html.ValidationMessageFor(model => model.Email)
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.PasswordFor(m => m.Password, new { Class = "form-control form-control-user", placeholder = "Password" })
+                                                <div class="colorValidation">
+                                                    @Html.ValidationMessageFor(model => model.Password)
+                                                </div>
+                                               
+                                            </div>
+
+                                            <button class="btn btn-primary btn-block text-white btn-user" type="submit">Ingresar</button>
+                                            <hr>
+                                        </div>
+                                    }
+
+                                    @if(ViewBag.noexiste != null)
+                                    {
+                                        <div class="alert alert-danger">
+                                            <text >@ViewBag.noexiste</text>
+                                        </div>
+                                    }
+                                    <div class="text-center"><a class="small" href="forgot-password.html">Olvidaste tu clave de acceso?</a></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

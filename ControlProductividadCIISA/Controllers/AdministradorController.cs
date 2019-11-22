@@ -7,17 +7,17 @@ using System.Web.Mvc;
 
 namespace ControlProductividadCIISA.Controllers
 {
-    public class AnalistaController : Controller
+    public class AdministradorController : Controller
     {
-        // GET: Analista
-       [Authorize]
+        // GET: Administrador
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
         [Permissions]
-        public ActionResult CrearSolicitud()
+        public ActionResult CrearProyecto()
         {
             return View();
         }
