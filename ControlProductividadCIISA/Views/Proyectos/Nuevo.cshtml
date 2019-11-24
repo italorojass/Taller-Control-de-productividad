@@ -1,0 +1,49 @@
+﻿@model ControlProductividadCIISA.Models.ViewModels.NuevoViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Nuevo Proyecto";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+    @using (Html.BeginForm("Nuevo", "Proyectos", FormMethod.Post))
+    {
+        <div style="padding-left:300px;padding-top:25px">
+            <div class="row">
+                <div class="col-md-12">
+
+                    @Html.LabelFor(o=> o.Nombre)<br />
+                    @Html.TextBoxFor(o => o.Nombre, " ", new { @class = "form.control" })
+                    @Html.ValidationMessageFor(o=> o.Nombre, null, new { @class = "alert" })<br />
+
+                    @Html.LabelFor(d => d.Descripcion)<br />
+                    @Html.TextBoxFor(d => d.Descripcion, " ", new { @class = "form.control" })
+                    @Html.ValidationMessageFor(d => d.Descripcion, null, new { @class = "alert" })<br />
+
+                   
+                     @Html.LabelFor(d => d.Fecha_inicio)
+                    <br /> @Html.EditorFor(d => d.Fecha_inicio, " ", new { @class = "form.control" })
+                    @Html.ValidationMessageFor(d => d.Fecha_inicio, null, new { @class = "alert" })<br />
+
+                    @Html.EditorFor(d => d.horainicio, " ", new { @class = "form.control" })
+
+
+
+                    <br />    @Html.LabelFor(d => d.Fecha_final)<br />
+                    @Html.EditorFor(d => d.Fecha_final, " ", new { @class = "form.control" })
+                    @Html.ValidationMessageFor(d => d.Fecha_final, null, new { @class = "alert" })
+                               
+                  
+                    
+                                                                   
+                    <br />
+                    <div style="padding-left:300px;padding-top:25px">
+                        <input type="submit" value="Guardar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+

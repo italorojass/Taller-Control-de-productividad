@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ControlProductividadCIISA.Models.ListaActividades>
+@{
+
+    int cal = 31;
+    int count = 0;
+
+    int indice = 0;
+
+    var MesDias = ViewData["dict"] as Dictionary<int, int>;
+
+    var hoy = DateTime.Today;
+
+    List<int> DiasPorMes = new List<int>();
+
+    List<int> CountMesesDict = new List<int>();
+
+    foreach (var c in MesDias.Keys)
+    {
+        CountMesesDict.Add(c);
+    }
+
+    foreach (var M in MesDias.Values)
+    {
+        DiasPorMes.Add(M);
+    }
+
+}
+<table width="100%" border="1" style="overflow-x: scroll;">
+    <tr>
+        <td></td>
+        <td colspan="31">
+            Dias
+        </td>
+    </tr>
+    <tr>
+        <td>MES</td>
+        @for (int i = 0; i < cal; i++)
+        {
+            count++;
+            <td bgcolor="#C6E2FF" align="center" startdate="@count"> <span id="@count">@count</span> </td>
+        }
+
+    </tr>
+
+    @foreach (var it in ViewBag.Meses)
+            {
+                indice++;//mes parado
+                for (int i = 0; i <= MesDias.Count(); i++)
+                {
+                    if (indice == i)
+                    {
+                <tr>
+                    <td bgcolor="#efefef">
+                        @it.ToUpper()
+                    </td>
+
+                    @for (int k = 1; k <= DiasPorMes[i - 1]; k++)
+                    {
+                        for (int d = 1; d <= cal; d++)
+                        {
+                            if (indice == CountMesesDict[i - 1])//aca muestra por dia
+                            {
+                                if (d == k)
+                                {
+                                    if (hoy.Day == k && hoy.Month == i)
+                                    {
+                                        <td class="tdHoy">
+                                            <table width="100%" border="1">
+                                                @foreach (var M in Model)
+                                                {
+                                                    if (M.HoraActividad.Day == k && M.HoraActividad.Month == i)
+                                                    {
+                                                        switch (M.EstadoActividad)
+                                                        {
+                                                            case 0:
+                                                                var title = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                                <tr>
+                                                                    <td style="background-color:lightcoral;" data-toggle="tooltip" data-placement="auto" title="@title">
+                                                                        <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                            <div style="width:100%;">
+                                                                                &nbsp;
+                                                                            </div>
+                                                                        </a>
+
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                            @*<span>@M.HoraActividad.Hour</span>:<span>@M.HoraActividad.Minute</span>- <span>@M.NombreActividad</span>*@
+                                                                            @*<a onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                                    <span style="color:white">Ver más</span>
+                                                                                </a>*@
+
+
+
+
+                                                    break;
+                                                case 1:
+                                                    var title1 = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                    <tr>
+                                                        <td style="background-color:lightgreen;" data-toggle="tooltip" data-placement="auto" title="@title1">
+                                                            <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                <div style="width:100%;">
+                                                                    &nbsp;
+                                                                </div>
+                                                            </a>
+
+                                                        </td>
+                                                    </tr>
+                                                                @*<span>@M.HoraActividad.Hour</span>:<span>@M.HoraActividad.Minute</span>- <span>@M.NombreActividad</span>*@
+                                                                @*<a onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                        <span style="color:white">Ver más</span>
+                                                                    </a>*@
+
+
+
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            </table>
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <table width="100%" border="1">
+                                                @foreach (var M in Model)
+                                                {
+                                                    if (M.HoraActividad.Day == k && M.HoraActividad.Month == i)
+                                                    {
+                                                        switch (M.EstadoActividad)
+                                                        {
+                                                            case 0:
+                                                                var title = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                                <tr>
+                                                                    <td style="background-color:lightcoral;" data-toggle="tooltip" data-placement="auto" title="@title">
+                                                                        <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                            <div style="width:100%;">
+                                                                                &nbsp;
+                                                                            </div>
+
+                                                                        </a>
+
+                                                                    </td>
+                                                                </tr>
+
+                                                                break;
+                                                            case 1:
+                                                                var title1 = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                                <tr>
+                                                                    <td style="background-color:lightgreen;" data-toggle="tooltip" data-placement="auto" title="@title1">
+                                                                        <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                            <div style="width:100%;">
+                                                                                &nbsp;
+                                                                            </div>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                                break;
+                                                        }
+
+                                                    }
+
+                                                }
+                                            </table>
+
+
+                                        </td>
+                                    }
+
+
+                                }
+
+                            }
+                        }
+
+                    }
+
+                </tr>
+            }
+        }
+
+    }
+</table>

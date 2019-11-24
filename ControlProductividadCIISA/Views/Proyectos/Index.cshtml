@@ -1,0 +1,54 @@
+﻿@model List<ControlProductividadCIISA.Models.ViewModels.ListProyectosViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Proyectos";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<div style="padding-left:300px;padding-top:25px">
+    <a href="~/Proyectos/Nuevo" class="btn btn-primary">Nuevo</a>
+
+</div>
+
+<div class="col-md-8">
+    <table class="table">
+        <div>
+            <div>
+                <tr>
+                    <th>Nro.</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha final</th>
+                    
+
+                    </td>
+
+                </tr>
+            </div>
+        </div>
+        @foreach (var oElemneto in Model)
+            {
+            <tr>
+                <td>@oElemneto.id</td>
+                <td>@oElemneto.Nombre</td>
+                    <td>@oElemneto.Descripcion</td>
+                    <td>@oElemneto.Fecha_inicio</td>
+                    <td>@oElemneto.Fecha_final</td>
+                <td>
+                    <a href="~/Proyectos/Editar/@oElemneto.id"class="btn btn-primary">Editar</a>
+                    <a href="~/Proyectos/Eliminar/@oElemneto.id"class="btn btn-danger">Eliminar</a>
+
+                </td>
+
+</tr>
+
+        }
+
+
+    </table>
+
+</div>
+

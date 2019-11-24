@@ -1,0 +1,402 @@
+﻿@model IEnumerable<ControlProductividadCIISA.Models.ListaActividades>
+@{
+    ViewBag.Title = "Agenda de Actividades";
+    Layout = null;
+
+    int cal = 31;
+    int count = 0;
+
+    int indice = 0;
+
+    var MesDias = ViewData["dict"] as Dictionary<int, int>;
+
+    var hoy = DateTime.Today;
+
+    List<int> DiasPorMes = new List<int>();
+
+    List<int> CountMesesDict = new List<int>();
+
+    foreach (var c in MesDias.Keys)
+    {
+        CountMesesDict.Add(c);
+    }
+
+    foreach (var M in MesDias.Values)
+    {
+        DiasPorMes.Add(M);
+    }
+
+}
+<table>
+    <tr>
+        <td>
+            <a class="btn btn-info btn-sm" id="btnBeforeYearNow" onclick="AfterYear('@ViewBag.yearNow')"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        </td>
+        <td>
+            <div id="year">
+                <i class="fa fa-calendar" aria-hidden="true"></i><span style="padding-left:8px;" id="spnFlechas">@ViewBag.yearNow</span>
+            </div>
+        </td>
+        <td>
+            <a class="btn btn-info btn-sm" id="btnAfterYearNow" onclick="NextYear('@ViewBag.yearNow')"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </td>
+        <td>
+            <a class="btn btn-info btn-sm" id="btnYearNow" onclick="GetCalendarPerYear('@ViewBag.yearNow')">Año</a>
+        </td>
+        <td>
+            <a class="btn btn-info btn-sm " id="btnMonthNow" onclick="GetCalendarPerMonth('@ViewBag.yearNow')">Mes</a>
+        </td>
+        <td>
+            <a class="btn btn-info btn-sm" id="btnWeekNow" onclick="GetCalendarPerWeek('@ViewBag.WeekNow')">Semana</a>
+        </td>
+        <td>
+            <a class="btn btn-info btn-sm" id="btnDayNow" onclick="GetCalendarPerDay('@ViewBag.DayNow')">Dia</a>
+        </td>
+
+
+    </tr>
+</table>
+<div id="tablaCalendario">
+    <table width="100%" style="overflow-x: scroll;" border="1">
+        <tr>
+            <td></td>
+            <td colspan="31">
+                Dias
+            </td>
+        </tr>
+        <tr>
+            <td>MES</td>
+            @for (int i = 0; i < cal; i++)
+            {
+                count++;
+                <td bgcolor="#C6E2FF" align="center" startdate="@count"> <span id="@count">@count</span> </td>
+            }
+
+        </tr>
+
+        @foreach (var it in ViewBag.Meses)
+            {
+                indice++;//mes parado
+                for (int i = 0; i <= MesDias.Count(); i++)
+                {
+                    if (indice == i)
+                    {
+                    <tr>
+                        <td bgcolor="#efefef">
+                            @it.ToUpper()
+                        </td>
+
+                        @for (int k = 1; k <= DiasPorMes[i - 1]; k++)
+                        {
+                            for (int d = 1; d <= cal; d++)
+                            {
+                                if (indice == CountMesesDict[i - 1])//aca muestra por dia
+                                {
+                                    if (d == k)
+                                    {
+                                        if (hoy.Day == k && hoy.Month == i)
+                                        {
+                                            <td class="tdHoy">
+                                                <table width="100%" border="1">
+                                                    @foreach (var M in Model)
+                                                    {
+                                                        if (M.HoraActividad.Day == k && M.HoraActividad.Month == i)
+                                                        {
+                                                            switch (M.EstadoActividad)
+                                                            {
+                                                                case 0:
+                                                                    var title = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                                    <tr>
+                                                                        <td style="background-color:lightcoral;" data-toggle="tooltip" data-placement="auto" title="@title">
+                                                                            <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                                <div style="width:100%;">
+                                                                                    &nbsp;
+                                                                                </div>
+                                                                            </a>
+
+                                                                        </td>
+                                                                    </tr>
+
+
+                                                                        @*<span>@M.HoraActividad.Hour</span>:<span>@M.HoraActividad.Minute</span>- <span>@M.NombreActividad</span>*@
+                                                                        @*<a onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                                <span style="color:white">Ver más</span>
+                                                                            </a>*@
+
+
+
+
+                                                        break;
+                                                    case 1:
+                                                        var title1 = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                        <tr>
+                                                            <td style="background-color:lightgreen;" data-toggle="tooltip" data-placement="auto" title="@title1">
+                                                                <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                    <div style="width:100%;">
+                                                                        &nbsp;
+                                                                    </div>
+                                                                </a>
+
+                                                            </td>
+                                                        </tr>
+                                                            @*<span>@M.HoraActividad.Hour</span>:<span>@M.HoraActividad.Minute</span>- <span>@M.NombreActividad</span>*@
+                                                                    @*<a onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                            <span style="color:white">Ver más</span>
+                                                                        </a>*@
+
+
+
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                </table>
+
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <table width="100%" border="1">
+                                                    @foreach (var M in Model)
+                                                    {
+                                                        if (M.HoraActividad.Day == k && M.HoraActividad.Month == i)
+                                                        {
+                                                            switch (M.EstadoActividad)
+                                                            {
+                                                                case 0:
+                                                                    var title = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                                    <tr>
+                                                                        <td style="background-color:lightcoral;" data-toggle="tooltip" data-placement="auto" title="@title">
+                                                                            <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                                <div style="width:100%;">
+                                                                                    &nbsp;
+                                                                                </div>
+
+                                                                            </a>
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    break;
+                                                                case 1:
+                                                                    var title1 = M.HoraActividad.Hour + " " + M.HoraActividad.Minute + " " + M.NombreActividad;
+                                                                    <tr>
+                                                                        <td style="background-color:lightgreen;" data-toggle="tooltip" data-placement="auto" title="@title1">
+                                                                            <a class="btn-link" onclick="GetDetalleAgenda()" data-toggle="modal" data-target="#myModal">
+                                                                                <div style="width:100%;">
+                                                                                    &nbsp;
+                                                                                </div>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    break;
+                                                            }
+
+                                                        }
+
+                                                    }
+                                                </table>
+
+
+                                            </td>
+                                        }
+
+
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                    </tr>
+                }
+            }
+
+        }
+    </table>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function GetDetalleAgenda() {
+        console.log("ce");
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AgendaActividades", "Modals")',
+            data: {
+
+            },
+            success: function (view) {
+                $('#ModalBody').html(view.Html);
+                $('#divModalHeaderTitle').text('Ingreso Agenda');
+                //$('#spnFlechas').text(view.Mes);
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+
+    var countafteryear = 0;
+    function AfterYear(yearnow) {
+        countafteryear++;
+
+        console.log(countafteryear);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AfterYear", "Agenda")',
+            data: {
+                yearnow: yearnow,
+                contador: countafteryear
+            },
+            success: function (view) {
+                $('#tablaCalendario').html(view.Html);
+                $('#spnFlechas').text(view.Mes);
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+    }
+
+
+
+    var countnext = 0;
+    function NextYear(yearnow) {
+
+        countnext++;
+        console.log(countnext);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("NextYear", "Agenda")',
+            data: {
+                yearnow: yearnow,
+                contador: countnext
+            },
+            success: function (view) {
+                $('#tablaCalendario').html(view.Html);
+                $('#spnFlechas').text(view.Mes);
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+    }
+
+
+
+    function GetCalendarPerYear(year) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("CalendarPerYear", "Agenda")',
+            data: {
+
+            },
+            success: function (view) {
+                $('#tablaCalendario').html(view);
+                $('#spnFlechas').text(year);
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+    }
+
+    function GetCalendarPerMonth(year1) {
+        console.log("hi " + year1);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CalendarPerMonth", "Agenda")',
+            data: {
+                year: year1
+            },
+            success: function (result) {
+                $('#tablaCalendario').html(result.Html);
+                //console.log(result.Html);
+                $('#spnFlechas').text(result.Mes);
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+
+    }
+
+    function GetCalendarPerWeek(month) {
+        console.log("Mes actual " + month);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CalendarPerWeek", "Agenda")',
+            data: {
+                month: month
+                //numerosemana: $('').val()
+            },
+            success: function (result) {
+                $('#tablaCalendario').html(result.Html);
+                //console.log(result.Html);
+                $('#spnFlechas').text(result.Mes);
+
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+
+    }
+
+    function GetCalendarPerDay(dia) {
+        console.log("Dia: " + dia);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CalendarPerDay", "Agenda")',
+            data: {
+                // month: month
+                //numerosemana: $('').val()
+            },
+            success: function (result) {
+                $('#tablaCalendario').html(result.Html);
+                console.log(result.Mes);
+                $('#spnFlechas').text(result.Mes);
+
+                $('#GetDiaHoy').val(result.Mes);
+
+            },
+            error: function (err) {
+                // $("#divLoading").hide();
+                MensajeShow(err);
+            }
+        });
+
+    }
+</script>
