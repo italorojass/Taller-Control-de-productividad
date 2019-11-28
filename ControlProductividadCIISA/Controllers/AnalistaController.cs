@@ -1,4 +1,5 @@
-﻿using ControlProductividadCIISA.Models.Login;
+﻿using ControlProductividadCIISA.Models;
+using ControlProductividadCIISA.Models.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,18 @@ namespace ControlProductividadCIISA.Controllers
     public class AnalistaController : Controller
     {
         // GET: Analista
-       [Authorize]
+        private ControlProductividadCIISAEntities db = new ControlProductividadCIISAEntities();
         public ActionResult Index()
         {
             return View();
         }
 
-        [Permissions]
+        public ActionResult SideBar()
+        {
+
+            return View();
+        }
+        
         public ActionResult CrearSolicitud()
         {
             return View();

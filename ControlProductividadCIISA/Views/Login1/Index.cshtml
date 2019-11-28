@@ -56,10 +56,10 @@
                                         </div>
                                     }
 
-                                    @if(ViewBag.noexiste != null)
+                                    @if(TempData["noexiste"] != null)
                                     {
                                         <div class="alert alert-danger">
-                                            <text >@ViewBag.noexiste</text>
+                                            <text >@TempData["noexiste"]</text>
                                         </div>
                                     }
                                     <div class="text-center"><a class="small" href="forgot-password.html">Olvidaste tu clave de acceso?</a></div>

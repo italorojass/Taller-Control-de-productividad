@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4d698360b44b42419df8da6de8cf37ee" Name="Diagram1">
+      <Diagram DiagramId="c53e870985c8401a8d54bc347ac89aa8" Name="Diagram1">
         <EntityTypeShape EntityType="ControlProductividadCIISAModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Area" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ControlProductividadCIISAModel.tbl_Estado_peticion" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
